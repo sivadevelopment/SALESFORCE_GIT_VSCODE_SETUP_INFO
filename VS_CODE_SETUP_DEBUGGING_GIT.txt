@@ -1,0 +1,285 @@
+1) Dev Org Creation
+
+2) Salesforce Development Experience
+   Visual Code
+   Install C:\Users\sivannarayana.p\AppData\Local\Programs\Microsoft VS Code
+   Saleforce extention pack instalation
+   Salesforce CLI
+   Install 
+   sfdx
+   sfdx update
+   sfdx plugins --core
+   go to environment variables and set cli Path--optional  
+   
+3) Setting Up My Domain and Dev Hub
+   My Domain:-
+   Having a custom domain is more secure, some salesforce features require it
+
+   Dev Hub:- search-- DevHub --enable dev hub
+   We have to enable dev hub to
+   1) create and manage orgs from the command line
+   2) view information about scaratch orgs
+   3) link namespace orgs  
+
+4) Setting up project and scratch org
+
+   sfdx force:project:create -n "first" 
+   Create a project
+   a)access Devhub
+   sfdx force:auth:web:login -a salesforceDev -d
+   b) create scratch org
+   sfdx force:org:create -a lwcScartchOrg -d 30 -f config/project-scratch-def.json
+   sfdx auth:logout --all
+   sfdx force:org:list
+   sfdx force:org:open 
+   sfdx commands
+   sfdx force:cofig:set defaultdevhubusername=<the dx dev hub user name>
+   sfdx force:cofig:set defaultdevhubusername=shivasri@ibm.com
+
+   what is dve hub ??
+   It is the main salesforce org that you will use to create and manage your scratch orgs
+
+
+   what is scratch org ??
+   it is source driven and disposable deployment of salesforce code and meta data. scratch orgs are driven by source.
+   sand boxes are copies of production.
+
+   Scartch orgs are temporary development instance environment. limited period
+   Scartch orgs gives instance or copy of salesforce environment for limited time period
+   Scartch orgs do not replace sandboxes
+   
+    scratch org creation--open default scratch org
+    push code to default scratch ---open default scratch org
+    to check deployment status
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+  Deploy from scratch org to production :-
+  --------------------------------------
+  Deploy our meta data from a scratch org to non scratch org(it can be sandbox/production)
+  ----------------------------------------------------------------------------------------
+ 
+ 1) Need package.xml for deploying sand box or production.
+    note:-for scratch org we don't need any package.xml
+ 2) Convert source formate to meta data format--sfdx force:source:convert -r(source directory) -d(output directory) -n(name of package/output)
+ 3) Custom object--ex:- custom meta data validation rules--after converting meta data format---all the meta data ralated to an object--> 
+    is in one object file(MDAPI)
+    But where is in source format all the meta ralated to objects are in seperate xml files(scratch org)
+ 4) After package.xml and mata data creation---to deploy same to production--sfdx force:mdapi:deploy -f(for zip)/-d(directory folder)
+   deploymentfolder(folder name) -u(user name)
+   to check deployment report---sfdx force:mdapi:deploy:report
+ 5) In Actual Production---need to authoraize before deploy
+   sfdx force:auth:web:login -r https://login.salesforce.com -a username
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+App Creation :-
+--------------
+    a) Create component under app
+    b) app creation and component deployment
+
+    1a) app creation
+       app manager
+       new lightning app
+
+    1b) page creation
+
+    lightning-user interface---lightning app builder---select  app page-- give app name ---select three region --
+    save and activate----select lightning experience --select app you have created as a part of step a and click add page to app and click save
+
+   c) componennt deplyoment 
+     sfdx force:source:push
+
+   d) componennt assignment
+   
+-------------------------------------------------------------------------------------------------------------------------------------------------------  
+Salesforce Deployment :-
+----------------------   
+               Tools availble for Development :- 
+               ------------------------------
+               a) Developer edition org
+               b) Developer console
+               c) Work bench
+               d) Vs Code
+               e) Prerequisites for vs code
+                  JDK 8 and above
+                  Salesforce CLI
+                  Visual studio code
+                  Sales force extentions for VS Code
+				  
+
+Deep Drive In Debugging :-
+-----------------------
+            a) Debug logs
+            b) Type of logging level
+            c) Decode log
+
+Salesforce Logging Levels :-
+--------------------------
+            1) Error 
+            2) Warn
+            3) Info
+            4) Debug
+            5) Fine
+            6) Finner
+            7) Finest
+
+Decode Debug Log :-
+-----------------
+    It helps you to track events occur in your org. Debug log contains information about
+    a) Data base changes 
+    b) Http callouts
+    c) Apex errors
+    d) Resources used by apex
+    e) Automated workflow process
+	
+	
+	
+Debug Log Files :-
+-----------------
+       1) Setup and debug log in salesforce org--new and set up debug log--and it will place the log file
+       2) Debugger log on developer console
+
+
+Debugging tools:-
+---------------
+     1) Interactive debugger(Licenced vertion)
+     2) Replay debugger(Free vertion)
+
+     *)HTML---> onclick={onClickHandler} ---> GOTO --> Declaration on Usages
+
+
+Time complexity(To show time taken by each process) :-
+----------------------------------------------------
+                      open the log in developer console --> debug --> View log pannels --> select (Execution tree, stack, log, overview)--> In execution over view --> it will show the report
+
+LWC Debug :-
+-----------
+    1) Debugger Mode--> for specific user
+    2) Session setting ---> Dissible browser caching
+
+    Inspect :- lightning component/modules/--> select file--> click --> {} -->
+    when debug it will return java script proxy
+    this.todos-->console
+    Json.Stringfy(this.todos);
+
+    Use custom levels--console--filter-->info
+    : ckick this symbol (customaize dev tools)--> short cuts--> Black boxing
+    : ckick this symbol (customaize dev tools)--> short cuts--> Prefernces --> enable custom formatters
+
+Using Production Mode:-
+---------------------
+      With minified java script
+      return proxy values(api, track, wire properties)...need to use Json.Stringfy() to see actual values
+
+Using Debug Mode :-
+-----------------
+With unminified java script
+return regular java script values
+LWC engine warnings
+
+Error Handling :-
+---------------
+For External service calls and Batch class failures we can use Custom settings to store service call failures
+
+Formatting Code on save :-
+------------------------
+project ---- > vscode ----> setting.json ---> "editor.formatOnSave" : true
+
+   
+   
+----------------------------------------------------------------------------------------------------------------
+   Git Account Creations :-
+   ----------------------
+
+   GIT Account Credentials :-
+   ------------------------
+      username :-  sivadevelopment
+      password :- Siva@415
+      Email:- sivannarayanapeddireddi99@gmail.com
+	  
+   GIT With GIT Bash :-
+   ------------------  	
+    Git:- Down Load and Install git https://git-scm.com/download/win
+    Open Gi Bash to verify version--- git --version---
+    git help config
+    to create local directory---mkdir test(directory name)
+    cd test--to move inside directory
+    git init---C:/Users/sivannarayana.p/test/.git/
+    git status
+    git add MyFirstDocument.txt
+    git commit -m "My First Commit"
+    git config --global user.username sivadevelopment
+    git remote add origin https://github.com/sivadevelopment/test_demo.git
+    git push origin master
+
+ Git With VS Code :-
+ ------------------
+ 
+  git init--register with repo
+  git is vertion control 
+  Staging--the files are ready to commit
+  Un Staging--not yet ready to commit
+  commit--- finalaizing the changes that i have done
+
+    pre requist--Stagging :-
+    ---------------------
+    git log
+    git config --global user.name "sivadevelopment"
+    git config --global user.email "sivannarayanapeddireddi99@gmail"
+    git config --global user.name "Your Name"
+	git config --get-all user.name
+    git config --get-all user.email
+	
+	git init
+    git add README.md
+    git commit -m "first commit"
+    git branch -M main
+    git remote add origin https://github.com/sivadevelopment/ci-cd-tutorial.git
+    git push -u origin main
+	git remote -variablesgit status
+    cd .. to move parent directory
+    git clone https://github.com/sivadevelopment/ci-cd-tutorial.git
+
+    To set your account's default identity.
+    Omit --global to set the identity only in this repository.
+	
+	Cloning Exsisting REPO Git:-
+    ---------------------------
+    1) Fork a repository
+        --create my own copy of github repo
+    2) clone a repository   
+       - git clone url
+    3) create a branch
+       -git checkout -b rahuldev
+    4) commit changes
+       - git status
+       - git add 
+       - git commit -m 'commit comments'   
+    5) Push changes   
+       git push origin master
+   
+   Resolve merge conflicts :-
+   ------------------------
+   a) Register original repo URL
+      git remote add upstream https://github.com/sivadevelopment/ci-cd-tutorial.git
+   
+   b) take a pull from original repo 
+        
+   ba) git checkout master
+   bb) git fetch upstream master
+   bc) git status
+   bd) git status
+   be) git merge upstrem/master
+   bf) merge conflict--compare changes--accept status changes
+   bg) git merge master --no--ff
+
+
+
+
+
+
+
+
+
+
+

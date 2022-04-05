@@ -1,0 +1,287 @@
+One Way Data Binding:- import track @track
+use event handler to create data binding from html to js
+two way data binding   this.dynamicGreating = event.target.value; event.target.checked
+template lightning card input div
+Conditional Rendaring:-  directives
+If-true
+If-false 
+looping Iteration
+<template for:each={cityList} for:item="city">
+<p key={city}>{city}</p>
+@track cityList = ['Hyd', 'Che', 'Ben'];
+ <template iterator:it={cityList}>
+ // it.first
+ //it.last
+ <p key={it.value}>{it.value}</p>
+ 
+ @track decorator always needs to use for reactive nature for non premetive data types such as list object but where as primitive types it's optional
+ 
+ properties:- it will make 
+ private properties are in non reactive in nature -- no data binding -- no value chnege in html change
+ private reactive properties
+ public properties
+ getters and setters
+ 
+ private properties:- can be used with in the component. if you want use outside component we should use public properties.
+ public properties:- parent to child and child to parent
+ @api values of this properties can be supplied by parent component
+ public propertie are read only in chile property parent to child
+ public properties are in reactive in nature
+ boolean public properties--- always needs to be assign in false--- child from parent it will be set in true
+ Slots:- by using public properties we can pass propertie values parent to chile. using slots we can passs html mark up from paent to child
+ named slotsun named slot
+ max 0 or 1 Un named slot
+ Public methods:-  call a method from parent component to child component
+ https://developer.salesforce.com/docs/component-library/overview/components
+ query selector:- used to get html element
+ Shadow Dom:- It will bundle the all the component ralated info and make sure it othet component should not effect.
+ Component life cycle :- TODO
+ child to parent :- Dispatching and event hadling
+  tileClickedHandler() {
+        const tileClicked = new CustomEvent('tileclick', { detail: this.meetingRoomInfo});
+        this.dispatchEvent(tileClicked);
+    }
+	<c-meeting-room meeting-room-info={room} show-room-info ontileclick={onTileClickHadler}
+	onTileClickHadler(e) {
+        const meetingRoomInfoChild = e.detail;
+        this.selectedMeetingRoomInfo = meetingRoomInfoChild.roomName;
+    }
+
+by using js:-  constructor() {
+        super();
+        this.template.addEventListener('tileclick', this.onTileClickHadler.bind(this))
+    }
+ tileClickedHandler() {
+        const tileClicked = new CustomEvent('tileclick', { detail: this.meetingRoomInfo, bubbles: true });
+        this.dispatchEvent(tileClicked);
+    }
+
+How to comunicate different componentes if they are not releated to same hirarchy:- Pubsup	Model
+publisher and subcriber
+publisher can fire an envent and subscriber should listen
+pubsub module contain four methods 
+1)same page
+2)fire event
+3)register
+4)unregister
+5)unrigisterAll
+import { fireEvent } from 'c/pubsub';
+import { currentPageReference } from 'lightning/navigation';
+@wire(currentPageReference) pageReference;
+tileClickedHandler() {
+        fireEvent(this.pageReference, 'pubsubtileclick', this.meetingRoomInfo);
+    }
+ @wire(currentPageReference) pageReference;
+    connectedCallback() {
+        registerListener('pubsubtileclick', this.onMeetingRoomSelectedHandler, this);
+    }
+
+    disconnectedCallback() {
+        unregisterAllListeners(this);
+    }
+
+    onMeetingRoomSelectedHandler(payload) {
+        this.selectedMeetingRoomInfo = payload;
+    }
+Accessing Sales force Data:-
+Lightning data service
+LDS based components
+@AuraEnabled --Wire method
+
+LDS:- we can access salesforce data and meta data without having server side controller
+Sharing Common java scrpt code:-  create a plain  java script file and write a method and export using export keyword and use it accross the oter components.
+lightning create form:-
+import { createRecord, getRecord } from 'lightning/uiRecordApi';
+   const filds = { 'Name': this.accountName, 'Phone': this.accountPhone };
+        const recordInput = { 'apiName': 'Accont', filds }
+        createRecord(recordInput).then(response => {
+Lightning view form:-
+const retriveFields = ['Account.Name', 'Account.Phone'];
+ @wire(getRecord, { 'recordId': '$recordId', retriveFields })
+    accountRecord;
+lightning record form :- Create/Edit 
+
+LDS Based Component:- 
+RecordViewEidit:-
+<lightning-record-edit-form object-api-name="Account" onsuccess={onSuccessHandler}>
+<p><lightning-input-field field-name="Name"></lightning-input-field></p>
+<lightning-record-view-form record-id={recordId} object-api-name="Account">
+
+Record Form:- 
+  <lightning-record-form object-api-name="Account" record-id={recordId} columns="2" mode="edit" fields={fieldsArray} onsuccess={onSuccessHandler}>
+    @track fieldsArray = ['Name', 'Phone'];
+	
+Hard Reference Fields :- By Registering using fields with salesforce.
+use @api public properties to retrive object name and record id. so that single component will work for  different objects.
+Using apex:- 
+public with sharing class AccountGetter {
+    
+    @AuraEnabled(cacheable=true)
+    public static List<Account> getAllAccounts(Integer noOfRecords){
+        return [select Id,  Name, Phone from Account limit :noOfRecords];
+    }
+}
+1)@wire(getAllAccountsData)
+    accounts;
+	
+2) getAccountsHandler() {
+        getAllAccountsData({ noOfRecords: this.noOfRecords }).then(response => {
+
+
+Tost Notification:- info, success, error, warning
+import { ShowToastEvent } from 'lightning/platformShowToastEvent'
+const toastEvent = new ShowToastEvent({
+                title: 'Accounts Loaded',
+                message: this.noOfRecords,
+                varient: 'success',
+            });
+            this.dispatchEvent(toastEvent);
+
+
+Meta File Configuration:-  TODO
+
+Lightning Navigation:-  navigation service uses page reference java script object.
+NavigationMixin.Navigate:- to navigate another page in application
+NavigationMixin.generateUrl
+import { NavigationMixin } from 'lightning/navigation';
+navigateSFDCFactsHandler() {
+        this[NavigationMixin.Navigate]({
+            type: 'standard_webPage',
+            attributes: {
+                url: 'https://sfdcfacts.com'
+            }
+        })
+Summer 20 Release:-		
+
+Lightning Messaging Service:-
+need craeate a messaging folder and needs to add lightning message xml
+and add some configuration
+import messageDemo from "@salesforce/messageChannel/messageDemo__c"; we are created
+import {
+  MessageContext,
+  publish,
+  subscribe,
+  unsubscribe,
+  APPLICATION_SCOPE
+} from "lightning/messageService";
+Sending Messages:-
+@wire(MessageContext) msgContext;
+const messagePayload = {
+        message: msg,
+        from: "LWC"
+      };
+publish(this.msgContext, messageDemo, messagePayload);
+
+Receiveing Messages:- 
+ subscription = null;
+
+  connectedCallback() {
+    if (!this.subscription) {
+      this.subscription = subscribe(
+        this.msgContext,
+        messageDemo,
+        msg => {
+          this.messageHandler(msg);
+        },
+        { scope: APPLICATION_SCOPE }
+      );
+    }
+  }
+
+  disconnectedCallback() {
+    unsubscribe(this.subscription);
+    this.subscription = null;
+  }
+  
+  messageHandler(msgPayload) {
+    //something with message
+    if (msgPayload && msgPayload.from !== "LWC") {
+      this.messages.push({
+        id: this.messages.length,
+        value: msgPayload.message,
+        from: msgPayload.from
+      });
+    }
+  }
+  
+  2) CSS module sharing accross different modules
+  
+  3) User permissions and custom permission
+  
+  
+sfdx force:project:create -n "LWC Project"
+sfdx force:auth:web:login -a lwc101 -d 
+sfdx force:org:create -a lwc101so1 -d 30 -f config/project-scratch-def.json -s
+sfdx force:org:open
+sfdx force:source:push
+https://power-saas-9782-dev-ed.lightning.force.com/lightning/setup/SetupOneHome/home
+sfdx commands
+sfdx plugins:install @salesforce/lwc-dev-server
+https://stackoverflow.com/questions/57750317/npm-install-not-installing-because-of-node-gyp
+npm config set
+C:\Users\psivnnarayana\AppData\Local\Programs\Python\Python37\Scripts\
+
+
+
+program having 6 mb allocation
+primitive data types: Intiger Long Decimal double boolean string date dateTime blob ID
+Blob:- to store files images all kind of binary data 
+ID:- which can be sales force record ID or maeata data. 
+15 or 18 characters size. 15 is case sensitive.
+Date,  Time, date.newInstance();
+constant variable:- final
+Data Type Convertion:- Type Cast Intiger.valueOf('');
+Access Modifier:-  private ,  protect, public , global
+default access modifier is private
+class canot be private but inner calss have private
+even inner class also cn not aceess private members of outer class
+class can be either public or global
+Protected:- variables and methods . we can access in inner classes and inharited calsses or extended classes.
+Public:- un restricated access with in the name space.
+Apex clases-> set up 
+Static Keyword:- share the values across all the instances . belongs to the class.
+Inside static method we can use only static variable only.
+in method level we can apply static and overide special keys.
+constructor:- to initialize variable during object creation
+Initialaization blocks:- to initialize variable during object creation
+{
+}
+static{
+}
+Apex Life Cycle:-
+Static initialaization block --> initialaization block---> constuctor
+Inner Class or Wrapper class:-  logically group the classes together. when a class supossed to used by one single class.
+we can not create instance of inner class directly.
+Encapsulate all the properties by Creating a class.
+
+Annotations:- 
+@Depricated
+@AuraEnabled(cacheble=true)  modifier:-cacheble=true . it makes apex method available in lightning pages
+@Future
+@InvokableMethod we can use in process builders-- Actions-Apex Method
+@InvokableVarible
+@IsTest
+@ReadOnly
+@RemoteAction
+@TestSetup
+@TestVisible
+
+Apex Testing:- 
+75 % code coverage manidatory  
+Unit Testing 
+A unit test is a funcation that is executed by a soft ware called test runner.
+@isTest
+class{
+@isTest
+public static void metod(){
+}
+}
+it must be static 
+return type must be void
+it either public or global
+
+
+
+	
+ 
+ 

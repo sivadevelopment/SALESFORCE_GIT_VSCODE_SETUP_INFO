@@ -1,0 +1,52 @@
+Top 10 Extentions for salesforce :-
+-----------------------------------
+1) salesforce extention pack
+2) apex replay debugger
+3) salesforce documenter---> install salesforce documenter--- and use ctrl + s --short cut key for class-- for metthod --select method and right click
+--insert apex method header
+4) salesforce LWC shortcut keys --> install salesforce extention Salesforce LWC Short Keys
+ --> example:- imp:, wire, tost, apex, arr:, lwc:
+5) salesforce package.xml generator extention for vs code(install) --> ctrl + shift + p --> search(package.xml)and select chose meta data components
+6) salesforce snippets ---> install Salesforce Snippets (two extention their)--> example:- metod, for, for soql, if, soql, map, testclass,interface, asserts(sys), batchclass, schedulable, future, invocablemethod, 
+7) saleforce SOQL editors -> Salesforce Query Editor v1.8.0-- select data base icon --> select fields and do lot more
+   and SOQL editor -- ctrl + shift + p --> create a quary in soql builder-->use
+8) salesforce DX code compaignion(Optional)
+9) apex pmd(best practces for sales force code)
+10)Force Code (Optional)
+
+
+VS Code SetUP :-
+--------------
+1) Create project with manifest option
+2) Authoraize the org
+3) If you want pull org data --open --pacakage.xml( under manifest folder)
+4) Right click on the any portion on the xml code in right panel and select option of sfdx retrieve manifest from Org 
+5) Pakage.xml---if you want to import custom objects are any meta data you just need to mentioned it in xml formate and do above step
+5) To automate deployment for saved code to org--open command pillatte--user settings--deploy on sva button enable
+6) Execute commonds ctrl + shift + p 
+7) Search Files ctrl + p
+8) set theme ctrl + k + T  -- file + preference + colour theme
+9) Automate comments-- --open command pallate--user snipeat--select apex or java script html--$1 init initmethod
+10) Automatic setter and getter--select fields-- ctrl + shift + p --get and set--need to install--getter and setter extention
+11) Multi select --ctrl+d--go to first occurnce and selct ctrl+d agin and again untill all occurences select
+12) Move selected text with arrow keys-- alt(preseed) + move arrow keys up are down based on requirment
+13) Auto generate package.xml---need to install package.xml extention--open ctrl + shift + p -- search with package 
+14) Better comments--better comments extention--TODO--ctrl + shift + p -- user settings--serach better comments
+15) Serach in project ctrl + shift + F
+16) PWD--extention
+17) Org Browser: to pull the data from Salesforce Org to get the meta data.
+18) Apex class can be pushed to new VS code
+19) SFDX SOBJECT refresh  definition -- to suggest  fields of the object (auto populate)
+20) File -- prefrences - settings -- extentions -- srcolls down to salesforce feature previews --- enable push on deploy on save
+21) Do above to push the source code to org by just clicking on save button 
+22) Detect conflict set sync enable ---- for meta data and git conflicts -- check this option in the salesforce feature previews
+23) Enable SOBJECT refresh on objects ---- for refresh the refresh all time to sign in to VS code --- its in same salesforce feature previews
+24) Package.xml file -- holds meta data of the org
+
+
+
+
+VS Code Apex Formatting:-
+-----------------------
+https://www.npmjs.com/package/prettier-plugin-apex
+Lightning LWC Link :- https://www.sfdckid.com/2020/03/javascript-standards-for-salesforce.html

@@ -1,0 +1,207 @@
+1)VS Code
+2)CLI
+3)GIT
+4)JAVA SetUP
+5) NODE Set UP
+------------------------
+Basic Setting -> 
+-------------
+                 Two types-> 
+	             1) User 
+	             2) Work Space
+
+  a) User--> For all technologies
+  b) WorkSpace-> Specific to technology(Zoom Level Settings)
+
+  ctrl + shift + P serach with specific option
+  ctrl+p--d/l/pub(default--lwc-- folder--pubsub )
+  ctrl+ shift + l for refractor variable
+  ctrl + v---to toggle screen
+  ctrl + shift + P --> toggle activity visible bar--toggle side bar
+ 
+  setting --> search --side bar--select value as left or right--(status bar)
+  setting-->  search-- activity--disable contol the visibility of the activity check box or (setting.json)
+  ctrl + shift + P --> toggle breadcrumbs
+
+Custom key board Short cuts:-
+---------------------------
+    ctrl + K + s --> search org browser and edit and give custom short cut key ctrl + o + b (ctrl+o ctrl+b)
+
+
+If we want to override out of the box short cuts:-
+-------------------------------------------------
+				ctrl + shift + p--search(keybord short cuts)--> select default keybord short cuts
+				copy serch key value pair you want your own short cut--ctrl + shift + p--search(keybord short cuts)--> select  keybord short cuts--paste the copied json and modify according to your need
+
+
+Basic Editing:-
+-------------
+		Duplecating Line :- Mouse over on the line---shift + alt + down word arrow
+		Moving Line      :- Mouse over on the line---alt + down word or up word arrow
+		Deleating Line   :- Cntl + X ----It will move cursor to staring of line position
+							If you want to maitain cusor position then-- ctrl + shift + K
+		Highlate a word or selectin all occurances off word and change --> ctrl + shift + l
+		Maintaining cursor activity                                    --> alt + left arrow or alt + right arrow
+		File explorar                                                  --> cntrl +shift + e
+
+
+VS Code Opening Files:-
+--------------
+      Complaint --> Only one file is opening if you open other file it will over ride
+      Solution  --> while opening double click files the it will allow Opening other file in side
+      settings  --> Search(preview)--work bench enable preview
+      Open file Ctrl+p
+      If you want other file to open in side bar then---ctrl+p  and selct the file and do ctrl+ enter
+      If you want to close-- ctrl + w
+      Split screen horizental or vertical select screen bar and press alt
+      Moving screens -- cntrl + 1---cntrl + 2
+      Through command pilot--- ctrl + shift + p-- serach--view split editor down or up
+      View --Editor layoyt--Grid 2by 2
+      Vew --Appernce--show side bar(for toggling bars)
+
+
+Multi Cursors, Modify selected occurrence, Block Selection :-
+-----------------------------------------------------------
+    Keep press on alt and try to go next line it will give multiple colours--- using both keybord and mouse
+    To eanble multiple cursers (for editing all at once only using keybord) ctrl + alt + down or up word arrow
+    Select name keep on press upto you changes Ctrl + D
+    Note :- ctrl + shift + l for selecting all occurenses
+    BOX section shift + alt darg the mouse .to selct block of Code and do the changes
+
+
+Symbols, grouping and searching across project:- 
+-----------------------------------------------
+  ctrl + P ---> global search--> search with some string and select a file---then type @ it will show all variables and methods-- 
+                then type : to grouping
+  If you want to see all class information--open file ---in side bar ---click OutLook--it will show all class related info
+  Global Text serach : CTRL + T --#name(some text)
+
+Find & Replace :-
+----------------
+   command pillot :- ctrl + shift + p
+   File explorar  :- ctrl + shift + V --ctrl + V --> to close the file
+   To highlate file explorar--> ctrl + 0
+   To highlate code file--> ctrl + 1
+   To highlate file explorar--> ctrl + 0 and if you search some thing it's start highlated all files with search keyword
+   To Reset the file explorar--> ctrl + shift + p-- and search--> colapse all or use - symbole in file explorar
+
+   Search File:- ctrl + F Repace :- alt + ctrl + f
+   Global Search File:- ctrl + shift + F Repace :- ctrl + shift + H
+
+Fun with Folding and Unfolding code :-
+-----------------------------------
+    Class folding :- ctrl + K  ctrl + 0
+    Class Un_folding :- ctrl + K  ctrl + J
+    Class Method folding :- ctrl + K  ctrl + {(open brace)
+    Class Method Un_folding :- ctrl + K  ctrl + }(close brace)
+
+
+Putting Get to definition and Go to References to use :-
+-----------------------------------------------------
+   In Apex if you to toggle between 2 classes and going to see  internal implemetation need to use Get to definition and Go to References and Peek
+
+
+Working with comments :-
+-----------------------
+     Indantation(Moving) --goto starting of the line and click tab OR ctrl + { 
+     Closing :--- ctrl + }
+     Comment the line :-- ctrl + forword slash /
+     Block Comment :- alt + shift + a
+	 
+	 
+Get Authenticated to an Org:-
+---------------------------
+
+1) Execute Anonymous Apex from VSCode
+ form org-- setup-- developer console--debug- Execute Anonymous window to run block of code
+ from vs code--Project folder--scripts--apex---hello.apex
+ write a pice of code -- ctrl + shift + p ---Execute Anonymous apex with currently selected text--after execute success full-- click on show--for debug seracg with debug keyword
+ ctrl + shift + p ---Execute Anonymous apex with editor contents
+ 
+2) Write SOQL queries in the editor :-
+   ----------------------------------
+   from vs code--Project folder--scripts--SOQL---select soql file--write quaries-- ctrl + shift + p--Execute SOQL with currently selected text
+   --> rest api's or tooling api--(for naormal object rest api, for special object tooling api)
+   short cut keys to use intilegence ctrl + space or fuction + cntrl + space(It will show all the fields)
+   
+3) Apex Test Execution in VS Code :-
+   -------------------------------
+  a) Activity bar-- bottom
+  b) Status bar--extention, search
+  c) side bar
+
+  
+  Status bar-- select ... and then Test and it will all test class in side bar-->select test class and run by clicking run test or run all tests--or
+  --in side bar it will show --run button and click
+  
+  if you want to run using short cut keys---> ctrl + ,(it will open settings)-->serach(code coverage)-->enable retrive test code coverage box
+  after run test class-open actual class --click(---) so it will show coverage on class
+  
+4) Purpose of Org Browser module :-
+   ------------------------------
+  
+5) Detect Conflicts in BETA :-
+   -------------------------
+    ctrl + ,--->(settings) ---> detect conflict
+	
+6) Use "Source Diff" when we are lost  or (SFDX Diff File Against Org) :- 
+   ------------------------------------------------------------------
+   Sfdx plugins:install @salesforce/sfdx-diff
+   
+7) Apex Replay Debugger :-
+   ---------------------
+   
+   Project-> .vscode -> launch.json
+   
+   {
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Program",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}\\app.js"
+    }
+  ]
+}
+
+
+"configurations": [
+  {
+    "name": "Launch Apex Debugger",
+    "type": "apex",
+    "request": "launch",
+    "sfdxProject": "${workspaceRoot}"
+  }
+]
+
+select line --ctrl + shift + p--search (toggle check point) or right click on line--select add check point--checkpoint
+ctrl + shift + p--run command--sfdx update checkpoints in org
+sfdx turn on apex debug log for replay debugger
+sfdx Get apex debug logs
+sfdx luch apex replay debugger with current file
+sfdx turn off apex debug log for replay debugger
+
+
+
+
+User Snippets:- 
+-------------
+         ctrl + shift + p--> user snippet--> java script file-->
+         https://snippet-generator.app/
+         $1 to highlate on tab click
+         $2
+         response.${3|getState(),getReturnValue,getError()|}
+         ${1:handleSomething} : function(cmp,evnt,helper){
+         end of the snippet}
+
+         single line Snippets:-
+         --------------------
+         "body" : "Var response = response.getReturnValue();"
+         
+		 
+
+ 
+
+
